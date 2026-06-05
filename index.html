@@ -1118,61 +1118,382 @@ Blame
 
         <section class="info-section" id="identity">
             <h2 class="section-title" id="identity-title">شناسنامه فنی فیکسر کوین</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h4 id="id1-title">🪙 نام توکن</h4>
-                    <p id="id1-desc">Fixer (FIXER)</p>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">مشخصات عمومی و هویت فنی</h3>
+                <div class="token-identity-grid">
+                    <div class="identity-box">
+                        <h5>نام ارز</h5>
+                        <p>فیکسر (Fixer)</p>
+                    </div>
+                    <div class="identity-box">
+                        <h5>نماد</h5>
+                        <p>FIXER</p>
+                    </div>
+                    <div class="identity-box">
+                        <h5>عرضه کل</h5>
+                        <p>10B توکن</p>
+                    </div>
+                    <div class="identity-box">
+                        <h5>شبکه</h5>
+                        <p>Base Chain</p>
+                    </div>
+                    <div class="identity-box">
+                        <h5>استاندارد</h5>
+                        <p>ERC-20</p>
+                    </div>
+                    <div class="identity-box">
+                        <h5>اعشار</h5>
+                        <p>8 رقم</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="id2-title">📊 عرضه کل</h4>
-                    <p id="id2-desc">10,000,000,000 (10 میلیارد)</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">ساختار توزیع توکن‌ها</h3>
+                <div class="tokenomics-diagram">
+                    <div class="wallet-circle wallet-1">
+                        <span>ولت ۱ (مالک)</span>
+                        <strong>7B توکن</strong>
+                        <small>70%</small>
+                    </div>
+                    <div class="wallet-circle wallet-2">
+                        <span>ولت ۲ (پیش‌فروش)</span>
+                        <strong>3B توکن</strong>
+                        <small>30%</small>
+                    </div>
+                    <div class="wallet-circle wallet-3">
+                        <span>ولت ۳ (AutoSwap)</span>
+                        <strong>کارمزدها</strong>
+                        <small>35%</small>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="id3-title">🔗 شبکه</h4>
-                    <p id="id3-desc">Base Network (L2)</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">مکانیزم کارمزد پله‌ای</h3>
+                <div class="tax-ladder">
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-50">50% - $0.00000125</div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-40">40% - $0.00025675</div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-30">30% - $0.00051225</div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-20">20% - $0.00076775</div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-10">10% - $0.00102325</div>
+                    </div>
+                    <div class="ladder-step">
+                        <div class="ladder-bar ladder-0">0% - $0.00128000</div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="id4-title">📋 استاندارد</h4>
-                    <p id="id4-desc">ERC-20</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">مکانیزم حسابداری غیرمتمرکز</h3>
+                <div class="threshold-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">📊</div>
+                        <div class="flow-content">
+                            <h6>فاز انباشت</h6>
+                            <p>کارمزدها در قرارداد جمع می‌شوند تا به 2M توکن برسند</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">⚡</div>
+                        <div class="flow-content">
+                            <h6>اجرای حد نصاب</h6>
+                            <p>در اولین فروش بعدی، تفکیک خودکار اجرا می‌شود</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">💰</div>
+                        <div class="flow-content">
+                            <h6>35% نقدینگی</h6>
+                            <p>تبدیل به ETH و واریز به ولت ۳</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔒</div>
+                        <div class="flow-content">
+                            <h6>65% اکوسیستم</h6>
+                            <p>انتقال توکن به ولت ۱ بدون فشار فروش</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="id5-title">💰 قیمت پیش‌فروش</h4>
-                    <p id="id5-desc">0.0000015 USDT</p>
-                </div>
-                <div class="feature-card">
-                    <h4 id="id6-title">🔒 کارمزد فروش</h4>
-                    <p id="id6-desc">50% → 0% (پله‌ای)</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">ابزارهای مدیریتی و لایه‌های حفاظتی</h3>
+                <div class="security-grid">
+                    <div class="security-item">
+                        <div class="icon">⚙️</div>
+                        <h6>setTier</h6>
+                        <p>مدیریت پله قیمتی</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="icon">�</div>
+                        <h6>setMin/MaxTx</h6>
+                        <p>کنترل ضد نهنگ</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="icon">🚨</div>
+                        <h6>emergencyWithdraw</h6>
+                        <p>برداشت اضطراری</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="icon">🚫</div>
+                        <h6>isBlacklisted</h6>
+                        <p>لیست سیاه ربات‌ها</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="icon">✅</div>
+                        <h6>isExcluded</h6>
+                        <p>معافیت رسمی</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="info-section" id="roadmap">
             <h2 class="section-title" id="roadmap-title">نقشه راه استراتژیک</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h4 id="rm1-title">🔹 فاز ۱</h4>
-                    <p id="rm1-desc">فونداسیون، امنیت مطلق و راه‌اندازی</p>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">فاز ۱: پونداسیون، امنیت مطلق و راه‌اندازی</h3>
+                <div class="threshold-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">🚀</div>
+                        <div class="flow-content">
+                            <h6>دیپلوی قرارداد</h6>
+                            <p>انتشار کد نهایی روی شبکه بیس با لایه امنیتی ضد هک</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">💰</div>
+                        <div class="flow-content">
+                            <h6>تأمین مالی اولیه</h6>
+                            <p>عرضه 2 میلیارد توکن برای جذب سرمایه‌گذاران اولیه</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔒</div>
+                        <div class="flow-content">
+                            <h6>قفل نقدینگی</h6>
+                            <p>تزریق 1B توکن به آیرودروم و قفل ابدی LP</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📢</div>
+                        <div class="flow-content">
+                            <h6>راه‌اندازی فیکسر نیوز</h6>
+                            <p>استارت کانال رسانه‌ای و ربات‌های نمایش قیمت</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="rm2-title">🔹 فاز ۲</h4>
-                    <p id="rm2-desc">تثبیت مارکت و فعال‌سازی موتورهای مالی</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">فاز ۲: تثبیت مارکت و فعال‌سازی موتورهای مالی</h3>
+                <div class="threshold-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">📊</div>
+                        <div class="flow-content">
+                            <h6>ثبت در مراجع جهانی</h6>
+                            <p>لیست در CoinMarketCap و CoinGecko</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">⚙️</div>
+                        <div class="flow-content">
+                            <h6>موتور درآمد خودکار</h6>
+                            <p>فعال‌سازی حد نصاب 2M توکن و تفکیک درآمدها</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🎁</div>
+                        <div class="flow-content">
+                            <h6>پلتفرم استیکینگ</h6>
+                            <p>پاداش به هولدرهای وفادار با سهم 15%</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="rm3-title">🔹 فاز ۳</h4>
-                    <p id="rm3-desc">سلطه رسانه‌ای و توکن‌سوزی‌های ۱۰ پله‌ای</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">فاز ۳: سلطه رسانه‌ای و توکن‌سوزی‌های برنامه‌ریزی‌شده</h3>
+                <div class="threshold-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">📱</div>
+                        <div class="flow-content">
+                            <h6>مارکتینگ ویرال</h6>
+                            <p>کمپین‌های تبلیغاتی در اینستاگرام و تلگرام</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔥</div>
+                        <div class="flow-content">
+                            <h6>توکن‌سوزی دستی</h6>
+                            <p>اجرای رویدادهای بزرگ سوزاندن از ولت ۱</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🐋</div>
+                        <div class="flow-content">
+                            <h6>جذب نهنگ‌ها</h6>
+                            <p>عبور از پله‌های میانی و کاهش کارمزد</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <h4 id="rm4-title">🔹 فاز ۴</h4>
-                    <p id="rm4-desc">کارمزد صفر، نقدشوندگی مطلق و توسعه بین‌المللی</p>
+            </div>
+
+            <div class="schematic-container">
+                <h3 class="schematic-title">فاز ۴: کارمزد صفر، آزادی مطلق و توسعه بین‌المللی</h3>
+                <div class="threshold-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">🎯</div>
+                        <div class="flow-content">
+                            <h6>فتح سقف قیمتی</h6>
+                            <p>لمس $0.00128000 و صفر شدن کامل کارمزد</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🏦</div>
+                        <div class="flow-content">
+                            <h6>لیست در CEX</h6>
+                            <p>ورود به صرافی‌های متمرکز بزرگ</p>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🌍</div>
+                        <div class="flow-content">
+                            <h6>کاربرد تجاری</h6>
+                            <p>ادغام در حواله‌های مالی و لجستیک بین‌المللی</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="info-section" id="whitepaper">
             <h2 class="section-title" id="whitepaper-title">وایت‌پیپر فیکسر کوین</h2>
-            <div class="feature-card" style="max-width: 800px; margin: 0 auto;">
-                <h4 id="wp-title">📄 خلاصه مدیریتی</h4>
-                <p id="wp-desc">در فضای به شدت در حال تغییر امور مالی غیرمتمرکز (DeFi)، نوسانات شدید بازار، تخلیه ناگهانی توکن‌ها توسط ربات‌های معامله‌گر و نگاه‌های کوتاه‌مدت نوسان‌گیران، همواره تهدیدهایی حیاتی برای توکن‌های تازه‌راه‌اندازی شده به شمار می‌روند. فیکسر کوین (FIXER) با معرفی یک مکانیزم هوشمند، تغییر بزرگی در قوانین توکنومیکس ایجاد کرده است: سیستم کارمزد پله‌ای پویای مبتنی بر قرارداد هوشمند غیرقابل‌تغییر.</p>
+
+            <div class="whitepaper-schematic">
+                <h3 class="wp-section-title">فلسفه بازار</h3>
+                <div class="philosophy-diagram">
+                    <div class="philosophy-pillar">
+                        <div class="icon">�</div>
+                        <h6>کشش ارگانیک رسانه‌ای</h6>
+                        <p>پشتیبانی فیکسر نیوز برای ایجاد پایگاه ارتباطی بومی و رو به رشد</p>
+                    </div>
+                    <div class="philosophy-pillar">
+                        <div class="icon">🛡️</div>
+                        <h6>حفاظت الگوریتمی</h6>
+                        <p>مدل ریاضی با رابطه معکوس بین قیمت و کارمزد فروش</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="whitepaper-schematic">
+                <h3 class="wp-section-title">ساختار توزیع توکن‌ها</h3>
+                <div class="tokenomics-pie">
+                    <div class="pie-chart"></div>
+                    <div class="pie-legend">
+                        <div class="legend-item">
+                            <div class="legend-color legend-color-1"></div>
+                            <div class="legend-text">پیش‌فروش و نقدینگی (30% - 3B)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color legend-color-2"></div>
+                            <div class="legend-text">پشتیبان تزریق نقدینگی (50% - 5B)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color legend-color-3"></div>
+                            <div class="legend-text">ذخیره استراتژیک (20% - 2B)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="whitepaper-schematic">
+                <h3 class="wp-section-title">مکانیزم کارمزد 51 پله‌ای</h3>
+                <div class="tax-tiers">
+                    <div class="tier-box high">
+                        <strong>50%</strong>
+                        <span>$0.00000125</span>
+                    </div>
+                    <div class="tier-box high">
+                        <strong>40%</strong>
+                        <span>$0.00025675</span>
+                    </div>
+                    <div class="tier-box mid">
+                        <strong>30%</strong>
+                        <span>$0.00051225</span>
+                    </div>
+                    <div class="tier-box mid">
+                        <strong>25%</strong>
+                        <span>$0.00064000</span>
+                    </div>
+                    <div class="tier-box low">
+                        <strong>20%</strong>
+                        <span>$0.00076775</span>
+                    </div>
+                    <div class="tier-box low">
+                        <strong>10%</strong>
+                        <span>$0.00102325</span>
+                    </div>
+                    <div class="tier-box low">
+                        <strong>0%</strong>
+                        <span>$0.00128000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="whitepaper-schematic">
+                <h3 class="wp-section-title">مکانیزم حسابداری غیرمتمرکز</h3>
+                <div class="threshold-diagram">
+                    <div class="threshold-stage">
+                        <h6>فاز انباشت</h6>
+                        <p>کارمزدهای فروش کسر شده در قرارداد جمع می‌شوند</p>
+                    </div>
+                    <div class="threshold-stage">
+                        <h6>اجرای حد آستانه</h6>
+                        <p>به محض رسیدن به 2M توکن، تفکیک خودکار اجرا می‌شود</p>
+                    </div>
+                    <div class="threshold-stage">
+                        <h6>35% نقدینگی</h6>
+                        <p>تبدیل به ETH و واریز به ولت ۳</p>
+                    </div>
+                    <div class="threshold-stage">
+                        <h6>65% اکوسیستم</h6>
+                        <p>انتقال توکن به ولت ۱ بدون فشار فروش</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="whitepaper-schematic">
+                <h3 class="wp-section-title">امنیت لایه‌ای و کنترل دسترسی</h3>
+                <div class="security-layers">
+                    <div class="security-layer">
+                        <div class="layer-icon">✅</div>
+                        <h6>لیست سفید</h6>
+                        <p>معافیت کیف‌پول‌های رسمی از کارمزد</p>
+                    </div>
+                    <div class="security-layer">
+                        <div class="layer-icon">🔒</div>
+                        <h6>lockTheSwap</h6>
+                        <p>محافظت در برابر حملات Reentrancy</p>
+                    </div>
+                    <div class="security-layer">
+                        <div class="layer-icon">🚫</div>
+                        <h6>لیست سیاه</h6>
+                        <p>مسدودسازی ربات‌های مخرب MEV</p>
+                    </div>
+                </div>
             </div>
         </section>
 
