@@ -15,6 +15,7 @@
             --card-bg: #121826;
             --primary: #00ffcc;
             --secondary: #0077ff;
+            --warning: #ffb703;
             --text: #ffffff;
             --text-muted: #7e8f9f;
             --border: rgba(255, 255, 255, 0.06);
@@ -40,7 +41,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
+            padding: 15px 8%;
             background: rgba(11, 15, 25, 0.85);
             backdrop-filter: blur(12px);
             position: fixed;
@@ -50,12 +51,29 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .logo {
-            font-size: 26px;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+            background: #fff;
+            padding: 2px;
+        }
+
+        .logo-text {
+            font-size: 24px;
             font-weight: 900;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
 
         nav a {
@@ -184,11 +202,29 @@
             border-radius: 24px;
             border: 1px solid var(--border);
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .panel-header-with-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .panel-logo {
+            height: 60px;
+            width: 60px;
+            background: #fff;
+            padding: 3px;
+            border-radius: 50%;
+            object-fit: contain;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
         }
 
         .presale-card h3 {
             text-align: center;
-            margin-bottom: 15px;
             font-size: 22px;
         }
 
@@ -227,18 +263,6 @@
             direction: ltr;
         }
 
-        .claim-notice {
-            font-size: 13px;
-            color: #ffb703;
-            background: rgba(255, 183, 3, 0.08);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 183, 3, 0.2);
-        }
-
-        /* Dashboard & Referral styling */
         .dashboard-box {
             background: rgba(0, 255, 204, 0.02);
             border: 1px solid rgba(0, 255, 204, 0.1);
@@ -306,8 +330,63 @@
             cursor: pointer;
         }
 
+        .guide-card {
+            background: rgba(255, 183, 3, 0.02);
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .guide-card h2 {
+            font-size: 24px;
+            color: var(--warning);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .guide-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .guide-list li {
+            font-size: 15px;
+            color: #e2e8f0;
+            position: relative;
+            padding-left: 25px;
+            padding-right: 25px;
+            line-height: 1.7;
+        }
+
+        html[dir="rtl"] .guide-list li { text-align: right; }
+        html[dir="ltr"] .guide-list li { text-align: left; }
+
+        .guide-list li::before {
+            content: "⚡";
+            position: absolute;
+            top: 0;
+        }
+
+        html[dir="rtl"] .guide-list li::before { right: 0; }
+        html[dir="ltr"] .guide-list li::before { left: 0; }
+
+        .chainlist-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .chainlist-link:hover { color: #fff; }
+
         .info-section {
-            padding: 100px 8%;
+            padding: 100px 8% 60px 8%;
             background: #0e1422;
             text-align: center;
         }
@@ -350,6 +429,99 @@
         .feature-card h4 { font-size: 20px; color: var(--primary); margin-bottom: 15px; }
         .feature-card p { color: var(--text-muted); font-size: 15px; }
 
+        /* Document Section Styling */
+        .docs-section {
+            padding: 60px 8% 100px 8%;
+            background: #0b0f19;
+            text-align: center;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .doc-card {
+            background: rgba(18, 24, 38, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 204, 0.08);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 255, 204, 0.1);
+        }
+
+        .doc-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 204, 0.05);
+            border: 2px dashed rgba(0, 255, 204, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .doc-card:hover .doc-icon {
+            background: var(--primary);
+            color: var(--bg-color);
+            border-style: solid;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .doc-card h4 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .doc-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-download {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            font-size: 15px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: var(--bg-color);
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4);
+        }
+
         footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted); }
 
         @media screen and (max-width: 768px) {
@@ -361,9 +533,13 @@
 <body>
 
     <header>
-        <div class="logo">FIXER COIN</div>
+        <div class="logo-container">
+            <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="logo-img">
+            <span class="logo-text">FIXER COIN</span>
+        </div>
         <nav>
             <a href="#about" id="nav-about">Features</a>
+            <a href="#docs" id="nav-docs">Documents</a>
             <a href="#presale" id="nav-presale">Presale</a>
         </nav>
         <div class="header-actions">
@@ -386,7 +562,10 @@
 
             <div class="presale-wrapper">
                 <div class="presale-card">
-                    <h3 id="panel-title">Public Presale Panel</h3>
+                    <div class="panel-header-with-logo">
+                        <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="panel-logo">
+                        <h3 id="panel-title">Public Presale Panel</h3>
+                    </div>
                     <div class="presale-info-tag" id="presale-tag">Fixed Price: 0.0000015 USDT (Base) | Supply: 2B FIXER</div>
                     <div class="input-group">
                         <label id="label-pay">Pay with (USDT - Base Network)</label>
@@ -397,10 +576,6 @@
                         <input type="text" id="fixerOutput" placeholder="0.0" disabled>
                     </div>
                     <button class="btn-connect" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px;" id="buy-btn">Buy Fixer Token</button>
-                    
-                    <div class="claim-notice" id="claim-msg">
-                        ⚠️ Notice: Token claims and rewards withdrawal will be activated after the public presale concludes.
-                    </div>
                 </div>
 
                 <div class="presale-card dashboard-box">
@@ -427,6 +602,16 @@
                         <button class="btn-copy-ref" onclick="copyReferralLink()" id="ref-copy-btn">Copy Link</button>
                     </div>
                 </div>
+
+                <div class="guide-card">
+                    <h2 id="guide-title">🚨 CRITICAL BUYING GUIDE</h2>
+                    <ul class="guide-list">
+                        <li id="guide-li1">Ensure your **USDT (Tether) is strictly on the Base Network**. Sending USDT from other networks (like TRC20, ERC20, or BSC) will result in irreversible loss of funds.</li>
+                        <li id="guide-li2">Set your Web3 Wallet (MetaMask / Trust Wallet) **network selection to Base Network** before confirming the transaction.</li>
+                        <li id="guide-li3">Need help adding Base Network to your wallet? You can add it securely via Chainlist (Powered by Chainlink): <br><a href="https://chainlist.org/chain/8453" target="_blank" class="chainlist-link">👉 Click here to add Base Network via Chainlist</a></li>
+                        <li id="guide-li4">**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -447,6 +632,40 @@
                 </div>
             </div>
         </section>
+
+        <section class="docs-section" id="docs">
+            <h2 class="section-title" id="docs-section-title">Official Token Documentation</h2>
+            <div class="docs-grid">
+                
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon">📄</div>
+                        <h4 id="doc1-title">Ecosystem Whitepaper</h4>
+                        <p id="doc1-desc">Complete project manual detailing the financial philosophy, dynamic system, and decentralized media infrastructure.</p>
+                    </div>
+                    <a href="وایت پیپر فیکسر کوین.docx" download class="btn-download" id="doc1-btn">Download Whitepaper</a>
+                </div>
+
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon">⚙️</div>
+                        <h4 id="doc2-title">Technical Specification</h4>
+                        <p id="doc2-desc">Deep architecture breakdown including the 51-tier reversibility tax protocol, accounting limits, and smart protections.</p>
+                    </div>
+                    <a href="شناسنامه فنی و توکنومیکس فیکسر.docx" download class="btn-download" id="doc2-btn">Download Tech Spec</a>
+                </div>
+
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon">🗺️</div>
+                        <h4 id="doc3-title">Strategic Roadmap</h4>
+                        <p id="doc3-desc">Strategic timeline from initial deployment and token burns to CEX listings and international merchant trade utility.</p>
+                    </div>
+                    <a href="نقشه راه استراتژیک پروژه فیکسر کوین.docx" download class="btn-download" id="doc3-btn">Download Roadmap</a>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -459,6 +678,7 @@
                 dir: "rtl",
                 title: "Fixer Coin | وب‌سایت رسمی فیکسر کوین",
                 navAbout: "مشخصات",
+                navDocs: "مستندات",
                 navPresale: "پیش‌فروش",
                 langBtn: "English",
                 walletBtn: "اتصال کیف پول",
@@ -470,7 +690,6 @@
                 labelPay: "پرداخت بر حسب (USDT - شبکه بیس)",
                 labelReceived: "توکن دریافتی (FIXER)",
                 buyBtn: "خرید توکن فیکسر",
-                claimMsg: "⚠️ توجه: برداشت توکن‌های خریداری‌شده و پاداش‌ها، پس از اتمام دوره پیش‌فروش عمومی فعال خواهد شد.",
                 dbTitle: "📊 پنل کاربری شما",
                 dbPurchasedLbl: "فیکسر خریداری شده",
                 dbRefsLbl: "تعداد معرف‌های شما",
@@ -478,13 +697,28 @@
                 refTitle: "🔗 معرفی فیکسر و دریافت ۵٪ پاداش",
                 refCopyBtn: "کپی لینک",
                 refNoWallet: "لطفاً ابتدا کیف پول خود را متصل کنید...",
+                guideTitle: "🚨 راهنمای حیاتی و الزامی خرید",
+                guideLi1: "دقت نمایید که تترهای (USDT) شما **حتماً باید بر بستر شبکه بیس (Base)** باشد. ارسال تتر از سایر شبکه‌ها (مانند TRC20 یا BSC) باعث از بین رفتن دارایی شما می‌شود.",
+                guideLi2: "قبل از تایید و انجام تراکنش، حتماً **شبکه کیف پول خود (متامسک / تراست‌ولت) را روی شبکه بیس (Base)** تنظیم نمایید.",
+                guideLi3: "برای اضافه کردن آسان و امن شبکه بیس به ولت خود، می‌توانید از مرجع رسمی پورتال چین‌لینک استفاده کنید: <br><a href='https://chainlist.org/chain/8453' target='_blank' class='chainlist-link'>👉 برای افزودن خودکار شبکه بیس کلیک کنید</a>",
+                guideLi4: "**سیاست برداشت:** فیکسر‌های خریداری‌شده و سود حاصل از معرفی، پس از اتمام دوره پیش‌فروش عمومی جهت کلیم و واریز به ولت فعال خواهند شد.",
                 featuresTitle: "ویژگی‌های بنیادی وایت پیپر فیکسر",
                 f1Title: "🔒 مکانیزم ضدِ نوسان (Anti-Dump)",
                 f1Desc: "اعمال محدودیت‌های معاملاتی هوشمند بر روی صرافی‌ها (حداقل ۱۰ میلیون و حداکثر ۲۰۰ میلیون توکن) جهت جلوگیری از دستکاری قیمت توسط نهنگ‌ها.",
                 f2Title: "📊 توکنومیک و تخصیص پیش‌فروش",
-                f2Desc: "تخصیص اختصاصی ۲,۰۰0,۰۰۰,۰۰۰ توکن فیکسر با قیمت ثابت اولیه ۰.۰۰۰۰۰۱۵ تتر جهت ایجاد بستر اولیه استخرهای نقدینگی.",
+                f2Desc: "تخصیص اختصاصی ۲,۰۰۰,۰۰۰,۰۰۰ توکن فیکسر با قیمت ثابت اولیه ۰.۰۰۰۰۰۱۵ تتر جهت ایجاد بستر اولیه استخرهای نقدینگی.",
                 f3Title: "🔵 بستر شبکه بیس (Base)",
                 f3Desc: "بهره‌مندی از امنیت فوق‌العاده لایه اول اتریوم همراه با کارمزدهای بسیار ناچیز شبکه بیس.",
+                docsSectionTitle: "مستندات رسمی و کلیدی توکن",
+                doc1Title: "وایت‌پیپر اکوسیستم",
+                doc1Desc: "دفترچه راهنمای کامل پروژه شامل جزییات فلسفه مالی، سیستم‌های پویا و زیرساخت رسانه‌ای غیرمتمرکز.",
+                doc1Btn: "دانلود وایت‌پیپر",
+                doc2Title: "شناسنامه فنی و توکنومیکس",
+                doc2Desc: "تحلیل دقیق معماری پله‌های کارمزد بازگشت‌پذیر، حد نصاب‌های حسابداری و لایه‌های مدیریتی قرارداد.",
+                doc2Btn: "دانلود سند فنی",
+                doc3Title: "نقشه راه استراتژیک",
+                doc3Desc: "برنامه زمانی توسعه پروژه از دیپلوی و توکن‌سوزی‌ها تا لیست صرافی‌ها و کاربرد تجاری در دنیای واقعی.",
+                doc3Btn: "دانلود نقشه راه",
                 footerText: "© 2026 فیکسر کوین. تمامی حقوق محفوظ است.",
                 alertCopy: "آدرس قرارداد فیکسر کوین کپی شد!",
                 alertRefCopy: "لینک معرف شما کپی شد!",
@@ -496,6 +730,7 @@
                 dir: "ltr",
                 title: "Fixer Coin | Official Website",
                 navAbout: "Features",
+                navDocs: "Documents",
                 navPresale: "Presale",
                 langBtn: "فارسی",
                 walletBtn: "Connect Wallet",
@@ -507,7 +742,6 @@
                 labelPay: "Pay with (USDT - Base Network)",
                 labelReceived: "Receive Token (FIXER)",
                 buyBtn: "Buy Fixer Token",
-                claimMsg: "⚠️ Notice: Token claims and rewards withdrawal will be activated after the public presale concludes.",
                 dbTitle: "📊 Your Account Dashboard",
                 dbPurchasedLbl: "Purchased FIXER",
                 dbRefsLbl: "Total Referrals",
@@ -515,6 +749,11 @@
                 refTitle: "🔗 Invite & Earn 5% Bonus",
                 refCopyBtn: "Copy Link",
                 refNoWallet: "Please connect your wallet first...",
+                guideTitle: "🚨 CRITICAL BUYING GUIDE",
+                guideLi1: "Ensure your **USDT (Tether) is strictly on the Base Network**. Sending USDT from other networks (like TRC20, ERC20, or BSC) will result in irreversible loss of funds.",
+                guideLi2: "Set your Web3 Wallet (MetaMask / Trust Wallet) **network selection to Base Network** before confirming the transaction.",
+                guideLi3: "Need help adding Base Network to your wallet? You can add it securely via Chainlist (Powered by Chainlink): <br><a href='https://chainlist.org/chain/8453' target='_blank' class='chainlist-link'>👉 Click here to add Base Network via Chainlist</a>",
+                guideLi4: "**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.",
                 featuresTitle: "Core Whitepaper Features",
                 f1Title: "🔒 Anti-Dump Mechanism",
                 f1Desc: "Imposing smart trading limits on exchanges (Min 10M and Max 200M tokens) to prevent price manipulation by whales.",
@@ -522,6 +761,16 @@
                 f2Desc: "Exclusive allocation of 2,000,000,000 Fixer tokens at a fixed initial price of 0.0000015 USDT to build foundational liquidity pools.",
                 f3Title: "🔵 Base Network Framework",
                 f3Desc: "Benefiting from the superior security of Ethereum Layer 1 combined with the extremely low transaction fees of the Base network.",
+                docsSectionTitle: "Official Token Documentation",
+                doc1Title: "Ecosystem Whitepaper",
+                doc1Desc: "Complete project manual detailing the financial philosophy, dynamic system, and decentralized media infrastructure.",
+                doc1Btn: "Download Whitepaper",
+                doc2Title: "Technical Specification",
+                doc2Desc: "Deep architecture breakdown including the 51-tier reversibility tax protocol, accounting limits, and smart protections.",
+                doc2Btn: "Download Tech Spec",
+                doc3Title: "Strategic Roadmap",
+                doc3Desc: "Strategic timeline from initial deployment and token burns to CEX listings and international merchant trade utility.",
+                doc3Btn: "Download Roadmap",
                 footerText: "© 2026 Fixer Coin. All Rights Reserved.",
                 alertCopy: "Fixer Coin contract address copied!",
                 alertRefCopy: "Your referral link copied!",
@@ -543,6 +792,7 @@
             document.getElementById("site-title").innerText = langData.title;
             
             document.getElementById("nav-about").innerText = langData.navAbout;
+            document.getElementById("nav-docs").innerText = langData.navDocs;
             document.getElementById("nav-presale").innerText = langData.navPresale;
             document.getElementById("lang-btn").innerText = langData.langBtn;
             document.getElementById("wallet-btn").innerText = langData.walletBtn;
@@ -554,7 +804,6 @@
             document.getElementById("label-pay").innerText = langData.labelPay;
             document.getElementById("label-received").innerText = langData.labelReceived;
             document.getElementById("buy-btn").innerText = langData.buyBtn;
-            document.getElementById("claim-msg").innerText = langData.claimMsg;
             
             document.getElementById("db-title").innerText = langData.dbTitle;
             document.getElementById("db-purchased-lbl").innerText = langData.dbPurchasedLbl;
@@ -564,6 +813,12 @@
             document.getElementById("ref-title").innerText = langData.refTitle;
             document.getElementById("ref-copy-btn").innerText = langData.refCopyBtn;
             
+            document.getElementById("guide-title").innerText = langData.guideTitle;
+            document.getElementById("guide-li1").innerHTML = langData.guideLi1;
+            document.getElementById("guide-li2").innerHTML = langData.guideLi2;
+            document.getElementById("guide-li3").innerHTML = langData.guideLi3;
+            document.getElementById("guide-li4").innerHTML = langData.guideLi4;
+
             if(!walletAddress) {
                 document.getElementById("ref-link-display").innerText = langData.refNoWallet;
             }
@@ -575,6 +830,18 @@
             document.getElementById("f2-desc").innerText = langData.f2Desc;
             document.getElementById("f3-title").innerText = langData.f3Title;
             document.getElementById("f3-desc").innerText = langData.f3Desc;
+
+            // Documentation Translation
+            document.getElementById("docs-section-title").innerText = langData.docsSectionTitle;
+            document.getElementById("doc1-title").innerText = langData.doc1Title;
+            document.getElementById("doc1-desc").innerText = langData.doc1Desc;
+            document.getElementById("doc1-btn").innerText = langData.doc1Btn;
+            document.getElementById("doc2-title").innerText = langData.doc2Title;
+            document.getElementById("doc2-desc").innerText = langData.doc2Desc;
+            document.getElementById("doc2-btn").innerText = langData.doc2Btn;
+            document.getElementById("doc3-title").innerText = langData.doc3Title;
+            document.getElementById("doc3-desc").innerText = langData.doc3Desc;
+            document.getElementById("doc3-btn").innerText = langData.doc3Btn;
             
             document.getElementById("footer-text").innerText = langData.footerText;
             calculateTokens();
@@ -610,8 +877,6 @@
                     let refLink = currentUrl + "?ref=" + walletAddress;
                     document.getElementById("ref-link-display").innerText = refLink;
 
-                    // در آینده کدهای وب۳ برای خواندن بالانس واقعی از آدرس قرارداد پیش‌فروش در اینجا اضافه می‌شود
-                    // فعلا مقادیر پیش‌فرض شبیه‌سازی می‌شوند:
                     document.getElementById("db-purchased").innerText = "0.0 FIXER";
                     document.getElementById("db-refs").innerText = "0";
                     document.getElementById("db-bonus").innerText = "0.0 FIXER";
