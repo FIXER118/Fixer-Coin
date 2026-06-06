@@ -1234,7 +1234,7 @@ Blame
             <a href="#identity" id="nav-identity">Identity</a>
             <a href="#roadmap" id="nav-roadmap">Roadmap</a>
             <a href="#whitepaper" id="nav-whitepaper">Whitepaper</a>
-            <a href="#presale" id="nav-presale">Presale</a>
+            <a href="#home" id="nav-presale">Presale</a>
         </nav>
         <div class="header-actions">
             <button class="btn-lang" onclick="toggleLanguage()" id="lang-btn">فارسی</button>
@@ -1248,13 +1248,13 @@ Blame
             <div class="hero-text">
                 <h1 id="hero-title">Smart & Financial Ecosystem <br><span>Fixer Coin (FIXER)</span></h1>
                 <p id="hero-desc">An innovative project built on the secure and fast Base network (Base USDT) with an Anti-Dump tokenomics structure and optimized dynamic transaction fees.</p>
- 
+
                 <div class="contract-box">
                     <span class="contract-address" id="contract">0x3Ec4588F1c0C52d73263D5C1fe5532d075c7De0F</span>
                     <button class="btn-copy" onclick="copyContract()" id="copy-btn">Copy Contract Address</button>
                 </div>
             </div>
- 
+
             <div class="presale-wrapper">
                 <div class="presale-card">
                     <div class="panel-header-with-logo">
@@ -1270,9 +1270,28 @@ Blame
                         <label id="label-received">Receive Token (FIXER)</label>
                         <input type="text" id="fixerOutput" placeholder="0.0" disabled>
                     </div>
-                    <button class="btn-connect" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px;" id="buy-btn">Buy Fixer Token</button>
+                    <div class="input-group">
+                        <label id="label-referrer">Referrer Address (Optional)</label>
+                        <input type="text" id="referrerInput" placeholder="0x...">
+                    </div>
+                    <div class="balance-display">
+                        <span id="label-usdt-balance">Your USDT Balance:</span>
+                        <b id="usdt-balance">0.0 USDT</b>
+                    </div>
+                    <div class="balance-display">
+                        <span id="label-reserved-balance">Reserved FIXER:</span>
+                        <b id="reserved-balance">0.0 FIXER</b>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-approve" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #ffb703, #ff9500); border: none; color: #000; margin-bottom: 10px; cursor: pointer;" id="approve-btn">Approve USDT</button>
+                        <button class="btn-connect" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #00ffcc, #00ccaa); border: none; color: #000; margin-bottom: 10px; cursor: pointer;" id="buy-btn">Buy Fixer Token</button>
+                        <button class="btn-claim" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #0077ff, #0055cc); border: none; color: #fff; cursor: pointer;" id="claim-btn">Claim Tokens</button>
+                    </div>
+                    <div class="network-status" id="network-status" style="margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; font-size: 14px; background: rgba(255, 183, 3, 0.1); border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703;">
+                        ⚠️ Please connect your wallet and switch to Base Network
+                    </div>
                 </div>
- 
+
                 <div class="presale-card dashboard-box">
                     <h3 id="db-title">📊 Your Account Dashboard</h3>
                     <div class="db-grid">
@@ -1295,14 +1314,17 @@ Blame
                         <button class="btn-copy-ref" onclick="copyReferralLink()" id="ref-copy-btn">Copy Link</button>
                     </div>
                 </div>
- 
+
                 <div class="guide-card">
                     <h2 id="guide-title">🚨 CRITICAL BUYING GUIDE</h2>
                     <ul class="guide-list">
                         <li id="guide-li1">Ensure your **USDT (Tether) is strictly on the Base Network**. Sending USDT from other networks (like TRC20, ERC20, or BSC) will result in irreversible loss of funds.</li>
                         <li id="guide-li2">Set your Web3 Wallet (MetaMask / Trust Wallet) **network selection to Base Network** before confirming the transaction.</li>
                         <li id="guide-li3">Need help adding Base Network to your wallet? You can add it securely via Chainlist (Powered by Chainlink): <br><a href="https://chainlist.org/chain/8453" target="_blank" class="chainlist-link">👉 Click here to add Base Network via Chainlist</a></li>
-                        <li id="guide-li4">**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.</li>
+                        <li id="guide-li4">**Gas Fee Requirement:** All transactions require ETH (Base) for gas fees. Make sure you have enough ETH in your wallet to cover transaction costs.</li>
+                        <li id="guide-li5">**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.</li>
+                        <li id="guide-li6">**Participation Limits:** Minimum and maximum participation in the presale for each wallet is 10 million to 200 million Fixer Coin tokens (15 USDT to 300 USDT).</li>
+                        <li id="guide-li7">**Automatic Calculation:** Enter USDT amount and the system will automatically calculate your Fixer Coin tokens based on the fixed price of 0.0000015 USDT per token.</li>
                     </ul>
                 </div>
             </div>
@@ -1689,70 +1711,6 @@ Blame
             </div>
         </section>
 
-        <section class="info-section" id="presale-section">
-            <h2 class="section-title" id="presale-section-title">Public Presale</h2>
-            <div class="presale-wrapper" style="max-width: 600px; margin: 0 auto;">
-                <div class="presale-card">
-                    <div class="panel-header-with-logo">
-                        <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="panel-logo">
-                        <h3 id="panel-title">Public Presale Panel</h3>
-                    </div>
-                    <div class="presale-info-tag" id="presale-tag">Fixed Price: 0.0000015 USDT (Base) | Supply: 2B FIXER</div>
-                    <div class="input-group">
-                        <label id="label-pay">Pay with (USDT - Base Network)</label>
-                        <input type="number" id="usdtInput" placeholder="0.0" oninput="calculateTokens()">
-                    </div>
-                    <div class="input-group">
-                        <label id="label-received">Receive Token (FIXER)</label>
-                        <input type="text" id="fixerOutput" placeholder="0.0" disabled>
-                    </div>
-                    <div class="input-group">
-                        <label id="label-referrer">Referrer Address (Optional)</label>
-                        <input type="text" id="referrerInput" placeholder="0x...">
-                    </div>
-                    <div class="balance-display">
-                        <span id="label-usdt-balance">Your USDT Balance:</span>
-                        <b id="usdt-balance">0.0 USDT</b>
-                    </div>
-                    <div class="balance-display">
-                        <span id="label-reserved-balance">Reserved FIXER:</span>
-                        <b id="reserved-balance">0.0 FIXER</b>
-                    </div>
-                    <div class="button-group">
-                        <button class="btn-approve" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #ffb703, #ff9500); border: none; color: #000; margin-bottom: 10px; cursor: pointer;" id="approve-btn">Approve USDT</button>
-                        <button class="btn-connect" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #00ffcc, #00ccaa); border: none; color: #000; margin-bottom: 10px; cursor: pointer;" id="buy-btn">Buy Fixer Token</button>
-                        <button class="btn-claim" style="width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; background: linear-gradient(135deg, #0077ff, #0055cc); border: none; color: #fff; cursor: pointer;" id="claim-btn">Claim Tokens</button>
-                    </div>
-                    <div class="network-status" id="network-status" style="margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; font-size: 14px; background: rgba(255, 183, 3, 0.1); border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703;">
-                        ⚠️ Please connect your wallet and switch to Base Network
-                    </div>
-                </div>
-
-                <div class="presale-card dashboard-box">
-                    <h3 id="db-title">📊 Your Account Dashboard</h3>
-                    <div class="db-grid">
-                        <div class="db-item">
-                            <span id="db-purchased-lbl">Purchased FIXER</span>
-                            <b id="db-purchased">0.0</b>
-                        </div>
-                        <div class="db-item">
-                            <span id="db-refs-lbl">Total Referrals</span>
-                            <b id="db-refs">0</b>
-                        </div>
-                        <div class="db-item" style="grid-column: span 2;">
-                            <span id="db-bonus-lbl">Referral Bonus Collected</span>
-                            <b id="db-bonus">0.0 FIXER</b>
-                        </div>
-                    </div>
-                    <h4 style="color: var(--primary); font-size: 15px; margin-top: 15px; text-align: center;" id="ref-title">🔗 Invite & Earn 5% Bonus</h4>
-                    <div class="ref-input-wrapper">
-                        <div class="ref-link-text" id="ref-link-display">Please connect your wallet first...</div>
-                        <button class="btn-copy-ref" onclick="copyReferralLink()" id="ref-copy-btn">Copy Link</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="info-section" id="about">
             <h2 class="section-title" id="features-title">Core Whitepaper Features</h2>
             <div class="features-grid">
@@ -2000,7 +1958,10 @@ Blame
                 guideLi1: "دقت نمایید که تترهای (USDT) شما **حتماً باید بر بستر شبکه بیس (Base)** باشد. ارسال تتر از سایر شبکه‌ها (مانند TRC20 یا BSC) باعث از بین رفتن دارایی شما می‌شود.",
                 guideLi2: "قبل از تایید و انجام تراکنش، حتماً **شبکه کیف پول خود (متامسک / تراست‌ولت) را روی شبکه بیس (Base)** تنظیم نمایید.",
                 guideLi3: "برای اضافه کردن آسان و امن شبکه بیس به ولت خود، می‌توانید از مرجع رسمی پورتال چین‌لینک استفاده کنید: <br><a href='https://chainlist.org/chain/8453' target='_blank' class='chainlist-link'>👉 برای افزودن خودکار شبکه بیس کلیک کنید</a>",
-                guideLi4: "**سیاست برداشت:** فیکسر‌های خریداری‌شده و سود حاصل از معرفی، پس از اتمام دوره پیش‌فروش عمومی جهت کلیم و واریز به ولت فعال خواهند شد.",
+                guideLi4: "**نیاز به ETH برای کارمزد:** تمام تراکنش‌ها نیاز به ETH (شبکه بیس) برای پرداخت کارمزد گس دارند. مطمئن شوید که موجودی ETH کافی در کیف پول خود برای پوشش هزینه‌های تراکنش دارید.",
+                guideLi5: "**سیاست برداشت:** فیکسرهای خریداری‌شده و سود حاصل از معرفی، پس از اتمام دوره پیش‌فروش عمومی جهت کلیم و واریز به ولت فعال خواهند شد.",
+                guideLi6: "**محدودیت مشارکت:** حداقل و حداکثر مشارکت در پیش‌فروش برای هر کیف پول 10 میلیون تا 200 میلیون توکن فیکسر کوین است (15 USDT تا 300 USDT).",
+                guideLi7: "**محاسبه خودکار:** با وارد کردن مقدار USDT، سیستم به صورت خودکار تعداد توکن‌های فیکر شما را بر اساس قیمت ثابت 0.0000015 USDT محاسبه می‌کند.",
                 featuresTitle: "ویژگی‌های بنیادی وایت پیپر فیکسر",
                 f1Title: "🔒 مکانیزم ضدِ نوسان (Anti-Dump)",
                 f1Desc: "اعمال محدودیت‌های معاملاتی هوشمند بر روی صرافی‌ها (حداقل ۱۰ میلیون و حداکثر ۲۰۰ میلیون توکن) جهت جلوگیری از دستکاری قیمت توسط نهنگ‌ها.",
@@ -2204,7 +2165,10 @@ Blame
                 guideLi1: "Ensure your **USDT (Tether) is strictly on the Base Network**. Sending USDT from other networks (like TRC20, ERC20, or BSC) will result in irreversible loss of funds.",
                 guideLi2: "Set your Web3 Wallet (MetaMask / Trust Wallet) **network selection to Base Network** before confirming the transaction.",
                 guideLi3: "Need help adding Base Network to your wallet? You can add it securely via Chainlist (Powered by Chainlink): <br><a href='https://chainlist.org/chain/8453' target='_blank' class='chainlist-link'>👉 Click here to add Base Network via Chainlist</a>",
-                guideLi4: "**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.",
+                guideLi4: "**Gas Fee Requirement:** All transactions require ETH (Base) for gas fees. Make sure you have enough ETH in your wallet to cover transaction costs.",
+                guideLi5: "**Token Delivery Policy:** Your purchased FIXER tokens and referral bonuses are securely tracked on-chain and will become claimable immediately after the public presale round officially concludes.",
+                guideLi6: "**Participation Limits:** Minimum and maximum participation in the presale for each wallet is 10 million to 200 million Fixer Coin tokens (15 USDT to 300 USDT).",
+                guideLi7: "**Automatic Calculation:** Enter USDT amount and the system will automatically calculate your Fixer Coin tokens based on the fixed price of 0.0000015 USDT per token.",
                 featuresTitle: "Core Whitepaper Features",
                 f1Title: "🔒 Anti-Dump Mechanism",
                 f1Desc: "Imposing smart trading limits on exchanges (Min 10M and Max 200M tokens) to prevent price manipulation by whales.",
@@ -2435,6 +2399,9 @@ Blame
             document.getElementById('guide-li2').innerHTML = langData.guideLi2;
             document.getElementById('guide-li3').innerHTML = langData.guideLi3;
             document.getElementById('guide-li4').innerHTML = langData.guideLi4;
+            document.getElementById('guide-li5').innerHTML = langData.guideLi5;
+            document.getElementById('guide-li6').innerHTML = langData.guideLi6;
+            document.getElementById('guide-li7').innerHTML = langData.guideLi7;
             document.getElementById('identity-title').textContent = langData.identityTitle;
             document.getElementById('id1-title').textContent = langData.id1Title;
             document.getElementById('id1-desc').textContent = langData.id1Desc;
