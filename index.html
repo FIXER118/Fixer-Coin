@@ -1667,16 +1667,47 @@ Blame
                             <b id="db-bonus">0.0 FIXER</b>
                         </div>
                     </div>
-                  <h4 style="color: var(--primary); font-size: 15px; margin-top: 15px; text-align: center;" id="ref-title">🔗 Invite & Earn 5% Bonus</h4>
+               <h4 style="color: var(--primary); font-size: 15px; margin-top: 15px; text-align: center;" id="ref-title">🔗 Invite & Earn 5% Bonus</h4>
                     <div class="ref-input-wrapper">
                         <div class="ref-link-text" id="ref-link-display">Please connect your wallet first...</div>
                         <button class="btn-copy-ref" onclick="copyReferralLink()" id="ref-copy-btn">Copy Link</button>
                     </div>
                 </div>
 
-                <div style="margin: 20px auto; max-width: 100%; text-align: center;">
+                <style>
+                    .blinking-title {
+                        color: #ff3333 !important; /* رنگ قرمز جیغ */
+                        font-size: 24px !important; /* سایز بزرگ فونت */
+                        font-weight: 900 !important; /* ضخامت زیاد */
+                        margin-bottom: 15px;
+                        text-align: center; /* تراز شدن دقیق در مرکز */
+                        animation: blinker 1.2s linear infinite; /* افکت خاموش و روشن شدن */
+                        display: block;
+                    }
+
+                    @keyframes blinker {
+                        50% {
+                            opacity: 0;
+                        }
+                    }
+                </style>
+
+                <div style="margin: 25px auto; max-width: 100%; text-align: center;">
+                    <h3 class="blinking-title">
+                        🚨 METAMASK BUYING GUIDE
+                    </h3>
                     <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;">
                         <source src="metamaskfixer.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div style="margin: 35px auto 25px auto; max-width: 100%; text-align: center;">
+                    <h3 class="blinking-title">
+                        🚨 TRUST WALLET BUYING GUIDE
+                    </h3>
+                    <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;">
+                        <source src="trustwalletfixer.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
