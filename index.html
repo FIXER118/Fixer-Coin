@@ -1696,13 +1696,38 @@ Blame
                     <h3 class="blinking-title">
                         🚨 METAMASK BUYING GUIDE
                     </h3>
+<!-- استایل اختصاصی چشمک‌زن قرمز و بزرگ برای عناوین انگلیسی -->
+                    <style>
+                        .blinking-title {
+                            color: #ff3333 !important; /* رنگ قرمز جیغ */
+                            font-size: 24px !important; /* سایز بزرگ فونت */
+                            font-weight: 900 !important; /* ضخامت زیاد */
+                            margin-bottom: 15px;
+                            text-align: center; /* تراز شدن دقیق در مرکز */
+                            animation: blinker 1.2s linear infinite; /* افکت خاموش و روشن شدن */
+                            display: block;
+                        }
+
+                        @keyframes blinker {
+                            50% {
+                                opacity: 0;
+                            }
+                        }
+                    </style>
+
+                    <!-- متن راهنما در مرکز و بالای ویدئوی اول -->
+                    <h3 class="blinking-title">
+                        🚨 METAMASK BUYING GUIDE
+                    </h3>
                     <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;">
                         <source src="metamaskfixer.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
 
+                <!-- باکس مربوط به ویدئوی دوم (تراست ولت) -->
                 <div style="margin: 35px auto 25px auto; max-width: 100%; text-align: center;">
+                    <!-- متن راهنما در مرکز و بالای ویدئوی دوم -->
                     <h3 class="blinking-title">
                         🚨 TRUST WALLET BUYING GUIDE
                     </h3>
