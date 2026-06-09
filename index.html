@@ -3616,12 +3616,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 const usdtBalance = await usdtContract.balanceOf(userWalletAddress);
                 document.getElementById('usdt-balance').textContent = ethers.utils.formatUnits(usdtBalance, 6) + ' USDT';
 
-                // Get reserved FIXER balance
-                const reservedBalance = await presaleContract.userBalances(userWalletAddress);
-                document.getElementById('reserved-balance').textContent = ethers.utils.formatUnits(reservedBalance, 18) + ' FIXER';
-            } catch (error) {
-                console.error('Error updating balances:', error);
-            }
+               // Get reserved FIXER balance
+try {
+    // اصلاح اصلی: آدرس کاربر (userWalletAddress) را به عنوان ورودی به تابع بدهید
+    const reservedBalance = await presaleContract.userBalances(userWalletAddress);
+    
+    // تبدیل مقدار دریافتی به فرمت قابل نمایش
+    document.getElementById('reserved-balance').textContent = ethers.utils.formatUnits(reservedBalance, 18) + ' FIXER';
+} catch (error) {
+    console.error('Error updating balances:', error);
+}
         }
 
         // Approve USDT for presale contract
