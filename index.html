@@ -3637,7 +3637,56 @@ if (!userWalletAddress) {
                     params: [{ chainId: '0x2105' }],
                 });
             } catch (err) {
-   
+                if (err.code === 4902) {
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [{
+                            chainId: '0x2105',
+                            chainName: 'Base',
+                            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                            rpcUrls: ['https://mainnet.base.org'],
+                            blockExplorerUrls: ['https://basescan.org']
+                        }],
+                    });
+                }
+            }
+        }
+        function calculateTokens() {
+            const usdtAmount = parseFloat(document.getElementById('usdtInput').value);
+            if (!isNaN(usdtAmount) && usdtAmount > 0) {
+                // محاسبه هماهنگ با قرارداد پیش فروش
+                const tokenPricePresale = 150000; // همان tokenPrice در قرارداد پیش فروش
+                const usdtAmountWei = ethers.utils.parseUnits(usdtAmount, 6);
+                const calculatedFixerWei = usdtAmountWei.mul(ethers.BigNumber.from(10).pow(14)).div(tokenPricePresale);
+                const calculatedFixer = parseFloat(ethers.utils.formatUnits(calculatedFixerWei, 8)); // FIXER 8 decimal
+                document.getElementById('fixerOutput').value = calculatedFixer.toLocaleString(undefined, {maximumFractionDigits: 2});
+            } else {
+                document.getElementById('fixerOutput').value = "0.0";
+            }
+        }
+
+        function updateDashboard() {
+            // کدهای خواندن اطلاعات آن‌چین برای Purchased FIXER و بونوس رفرال در اینجا قرار می‌گیرد.
+        }
+
+        function copyContract() {
+            const contractAddress = document.getElementById('contract').innerText;
+            navigator.clipboard.writeText(contractAddress);
+            showToast("آدرس قرارداد کپی شد!", 'success');
+        }
+
+        function copyReferralLink() {
+            const refLink = document.getElementById('ref-link-display').innerText;
+            navigator.clipboard.writeText(refLink);
+            showToast("لینک رفرال کپی شد!", 'success');
+        }
+
+        function toggleQRCode() {
+            const qrContainer = document.getElementById('qrcode-container');
+            const qrBtn = document.getElementById('qr-toggle-btn');
+            const refLink = document.getElementById('ref-link-display').innerText;
+
+            if (qrContainer.style.display === 'none') {
                 if (refLink && refLink !== 'Please connect your wallet first...') {
                     QRCode.toCanvas(document.getElementById('qrcode'), refLink, function (error) {
                         if (error) console.error(error);
