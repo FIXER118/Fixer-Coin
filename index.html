@@ -280,6 +280,78 @@
  
         html[dir="rtl"] .btn-copy { margin-right: 10px; }
         html[dir="ltr"] .btn-copy { margin-left: 10px; }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success { border-left: 4px solid #00ffcc; }
+        .toast.error { border-left: 4px solid #ff4444; }
+        .toast.warning { border-left: 4px solid #ffaa00; }
+        .toast.info { border-left: 4px solid #4488ff; }
+
+        .toast-icon { font-size: 20px; }
+        .toast-message { flex: 1; color: var(--text); font-size: 14px; }
+        .toast-close { cursor: pointer; color: var(--text-muted); font-size: 18px; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        button.loading .spinner {
+            display: inline-block;
+        }
+
+        button:not(.loading) .spinner {
+            display: none;
+        }
  
         .presale-wrapper {
             flex: 1;
@@ -1518,6 +1590,9 @@
 </head>
 <body>
  
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <header>
         <div class="logo-container">
             <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="logo-img">
@@ -1636,7 +1711,7 @@
 
 </div> <!-- تگ بسته شدن باکس اصلی ویدیو -->
 
-<div class="presale-wrapper"> <!-- شروع بخش پیش‌فروش شما -->
+<div class="presale-wrapper" id="presale-section"> <!-- شروع بخش پیش‌فروش شما -->
                 <div class="presale-card">
                     <div class="panel-header-with-logo">
                         <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="panel-logo">
@@ -2924,7 +2999,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // آدرس‌های حیاتی پروژه فیکسر کوین (تنظیم شده بر اساس کانترکت‌های جدید شما)
         const TOKEN_ADDRESS = "0x3Ec4588F1c0C52d73263D5C1fe5532d075c7De0F";
-        const PRESALE_ADDRESS = "0x217e6b606dd60a136776965554f0cbdc618ff3d3";
+        const PRESALE_ADDRESS = "0xec703a2D2c46500B9932EB68db6Bd07F65d990cA";
         const USDT_BASE_ADDRESS = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"; // USDT رسمی روی شبکه بیس
         const ADMIN_ADDRESS = "0x5d4098869b9e687572365c188ab0aa83f2428967"; // آدرس ادمین برای دسترسی به پنل مدیریت
  
@@ -3349,6 +3424,33 @@ if (!userWalletAddress) {
             }
         });
 
+        // Toast Notification Function
+        function showToast(message, type = 'info', duration = 4000) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icons = {
+                success: '✓',
+                error: '✕',
+                warning: '⚠',
+                info: 'ℹ'
+            };
+            
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[type]}</span>
+                <span class="toast-message">${message}</span>
+                <span class="toast-close" onclick="this.parentElement.remove()">×</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
         // ۱. تابع اتصال به کیف‌پول (Connect Wallet) - اصلاح شده
         async function connectWallet() {
             if (window.ethereum) {
@@ -3358,7 +3460,7 @@ if (!userWalletAddress) {
 
                     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
                     if (chainId !== '0x2105') {
-                        alert("لطفاً شبکه کیف‌پول خود را به Base Network تغییر دهید.");
+                        // خودکار تغییر به Base بدون alert
                         await switchNetworkToBase();
                     }
 
@@ -3372,13 +3474,16 @@ if (!userWalletAddress) {
                     // Track referral visit
                     trackVisit();
 
+                    // اسکرول خودکار به بخش presale
+                    document.getElementById('presale-section').scrollIntoView({ behavior: 'smooth' });
+
                     updateDashboard();
 
                 } catch (error) {
                     console.error("اتصال به ولت لغو شد:", error);
                 }
             } else {
-                alert("ولت Web3 یافت نشد! لطفاً متامسک یا تراست ولت را نصب کنید.");
+                showToast("ولت Web3 یافت نشد! لطفاً متامسک یا تراست ولت را نصب کنید.", 'error');
             }
         }
         async function switchNetworkToBase() {
@@ -3405,7 +3510,11 @@ if (!userWalletAddress) {
         function calculateTokens() {
             const usdtAmount = parseFloat(document.getElementById('usdtInput').value);
             if (!isNaN(usdtAmount) && usdtAmount > 0) {
-                const calculatedFixer = usdtAmount / TOKEN_PRICE;
+                // محاسبه هماهنگ با قرارداد پیش فروش
+                const tokenPricePresale = 150000; // همان tokenPrice در قرارداد پیش فروش
+                const usdtAmountWei = ethers.utils.parseUnits(usdtAmount, 6);
+                const calculatedFixerWei = usdtAmountWei.mul(ethers.BigNumber.from(10).pow(14)).div(tokenPricePresale);
+                const calculatedFixer = parseFloat(ethers.utils.formatUnits(calculatedFixerWei, 8)); // FIXER 8 decimal
                 document.getElementById('fixerOutput').value = calculatedFixer.toLocaleString(undefined, {maximumFractionDigits: 2});
             } else {
                 document.getElementById('fixerOutput').value = "0.0";
@@ -3419,13 +3528,13 @@ if (!userWalletAddress) {
         function copyContract() {
             const contractAddress = document.getElementById('contract').innerText;
             navigator.clipboard.writeText(contractAddress);
-            alert("آدرس قرارداد کپی شد!");
+            showToast("آدرس قرارداد کپی شد!", 'success');
         }
 
         function copyReferralLink() {
             const refLink = document.getElementById('ref-link-display').innerText;
             navigator.clipboard.writeText(refLink);
-            alert("لینک رفرال کپی شد!");
+            showToast("لینک رفرال کپی شد!", 'success');
         }
 
         // Admin Panel Functions
@@ -3440,7 +3549,7 @@ if (!userWalletAddress) {
         function copyAdminRefLink() {
             const refLink = document.getElementById('admin-ref-link').value;
             navigator.clipboard.writeText(refLink);
-            alert("لینک اختصاصی کپی شد!");
+            showToast("لینک اختصاصی کپی شد!", 'success');
         }
 
         function loadAdminData() {
@@ -3520,13 +3629,15 @@ if (!userWalletAddress) {
             // Check if this buyer is already tracked
             const existingRef = referralData[referrerAddress].referrals.find(r => r.address === buyerAddress);
             if (existingRef) {
-                if (amount && !existingRef.purchased) {
+                // هر خرید جدید را جداگانه ثبت می‌کنیم (برای اعمال به همه خریدها)
+                if (amount) {
                     existingRef.purchased = true;
-                    existingRef.amount = amount;
-                    existingRef.bonus = amount * 0.05 / 0.0000015; // 5% bonus in FIXER
+                    existingRef.amount = (existingRef.amount || 0) + amount; // جمع خریدها
+                    existingRef.bonus = (existingRef.bonus || 0) + (amount * 0.05 / 0.0000015); // جمع پاداش‌ها
+                    existingRef.purchaseCount = (existingRef.purchaseCount || 0) + 1; // تعداد خریدها
                     referralData[referrerAddress].totalBuyers++;
                     referralData[referrerAddress].totalVolume += amount;
-                    referralData[referrerAddress].totalBonus += existingRef.bonus;
+                    referralData[referrerAddress].totalBonus += (amount * 0.05 / 0.0000015);
                 }
             } else {
                 const newRef = {
@@ -3534,7 +3645,8 @@ if (!userWalletAddress) {
                     date: new Date().toLocaleDateString('fa-IR'),
                     purchased: !!amount,
                     amount: amount || 0,
-                    bonus: amount ? amount * 0.05 / 0.0000015 : 0
+                    bonus: amount ? amount * 0.05 / 0.0000015 : 0,
+                    purchaseCount: amount ? 1 : 0
                 };
                 referralData[referrerAddress].referrals.push(newRef);
                 if (amount) {
@@ -3642,8 +3754,8 @@ try {
     // اصلاح اصلی: آدرس کاربر (userWalletAddress) را به عنوان ورودی به تابع بدهید
     const reservedBalance = await presaleContract.userBalances(userWalletAddress);
     
-    // تبدیل مقدار دریافتی به فرمت قابل نمایش
-    document.getElementById('reserved-balance').textContent = ethers.utils.formatUnits(reservedBalance, 18) + ' FIXER';
+    // تبدیل مقدار دریافتی به فرمت قابل نمایش (با 8 decimal برای هماهنگی با قرارداد پیش فروش)
+    document.getElementById('reserved-balance').textContent = ethers.utils.formatUnits(reservedBalance, 8) + ' FIXER';
 } catch (error) {
     console.error('Error updating balances:', error);
 }
@@ -3652,39 +3764,42 @@ try {
         // Approve USDT for presale contract
         async function approveUSDT() {
             if (!userWalletAddress) {
-                alert("لطفاً ابتدا کیف پول خود را متصل کنید.");
+                showToast("لطفاً ابتدا کیف پول خود را متصل کنید.", 'warning');
                 return;
             }
 
             if (!await checkNetwork()) {
-                alert("لطفاً به شبکه Base تغییر دهید.");
+                showToast("لطفاً به شبکه Base تغییر دهید.", 'warning');
                 await switchNetworkToBase();
                 return;
             }
 
             const usdtAmount = document.getElementById('usdtInput').value;
             if (!usdtAmount || usdtAmount <= 0) {
-                alert("لطفاً مقدار معتبری برای تایید وارد کنید.");
+                showToast("لطفاً مقدار معتبری برای تایید وارد کنید.", 'warning');
                 return;
             }
 
             try {
                 const approveBtn = document.getElementById('approve-btn');
-                approveBtn.textContent = "Processing...";
+                approveBtn.innerHTML = '<span class="spinner"></span>Processing...';
+                approveBtn.classList.add('loading');
                 approveBtn.disabled = true;
 
                 const amountInWei = ethers.utils.parseUnits(usdtAmount, 6);
                 const tx = await usdtContract.approve(PRESALE_ADDRESS, amountInWei);
                 await tx.wait();
 
-                alert("تایید تتر با موفقیت انجام شد!");
+                showToast("تایید تتر با موفقیت انجام شد!", 'success');
                 approveBtn.textContent = translations[currentLang].approveBtn;
+                approveBtn.classList.remove('loading');
                 approveBtn.disabled = false;
             } catch (error) {
                 console.error('Error approving USDT:', error);
-                alert("خطا در تایید تتر: " + error.message);
+                showToast("خطا در تایید تتر: " + error.message, 'error');
                 const approveBtn = document.getElementById('approve-btn');
                 approveBtn.textContent = translations[currentLang].approveBtn;
+                approveBtn.classList.remove('loading');
                 approveBtn.disabled = false;
             }
         }
@@ -3692,34 +3807,53 @@ try {
        // Buy tokens with approved USDT
 async function buyTokens() {
     if (!userWalletAddress) {
-        alert("لطفاً ابتدا کیف پول خود را متصل کنید.");
+        showToast("لطفاً ابتدا کیف پول خود را متصل کنید.", 'warning');
         return;
     }
 
     if (!await checkNetwork()) {
-        alert("لطفاً به شبکه Base تغییر دهید.");
+        showToast("لطفاً به شبکه Base تغییر دهید.", 'warning');
         await switchNetworkToBase();
         return;
     }
 
     const usdtAmount = document.getElementById('usdtInput').value;
     if (!usdtAmount || usdtAmount <= 0) {
-        alert("لطفاً مقدار معتبری برای خرید وارد کنید.");
+        showToast("لطفاً مقدار معتبری برای خرید وارد کنید.", 'warning');
         return;
     }
 
-    // محاسبه تعداد توکن‌ها
-    const tokensToReceive = parseFloat(usdtAmount) / TOKEN_PRICE;
+    // محاسبه تعداد توکن‌ها - هماهنگ با قرارداد پیش فروش
+    // قرارداد پیش فروش: (_usdtAmount * 1e14) / tokenPrice
+    // tokenPrice در قرارداد پیش فروش = 150000 (برای 0.0000015 USDT)
+    // USDT با 6 decimal، FIXER با 8 decimal
+    const tokenPricePresale = 150000; // همان tokenPrice در قرارداد پیش فروش
+    const usdtAmountWei = ethers.utils.parseUnits(usdtAmount, 6);
+    const tokensToReceiveWei = usdtAmountWei.mul(ethers.BigNumber.from(10).pow(14)).div(tokenPricePresale);
+    const tokensToReceive = parseFloat(ethers.utils.formatUnits(tokensToReceiveWei, 8)); // FIXER 8 decimal
+    
     const minTokens = 10000000; // 10 میلیون توکن
     const maxTokens = 200000000; // 200 میلیون توکن
 
-    if (tokensToReceive < minTokens) {
-        alert(`حداقل مشارکت در پیش فروش برای هر کیف پول 10 میلیون توکن فیکسر کوین است (${(minTokens * TOKEN_PRICE).toFixed(2)} USDT)`);
+    // بررسی موجودی فعلی کاربر در قرارداد (با 8 decimal)
+    let currentBalance = 0;
+    try {
+        const balanceWei = await presaleContract.userBalances(userWalletAddress);
+        currentBalance = parseFloat(ethers.utils.formatUnits(balanceWei, 8)); // FIXER 8 decimal
+    } catch (error) {
+        console.error('Error getting current balance:', error);
+    }
+
+    const totalTokensAfterPurchase = currentBalance + tokensToReceive;
+
+    // بررسی محدودیت‌ها بر اساس مجموع خریدهای کیف پول
+    if (totalTokensAfterPurchase < minTokens) {
+        showToast(`حداقل مشارکت در پیش فروش برای هر کیف پول 10 میلیون توکن فیکسر کوین است (${(minTokens * TOKEN_PRICE).toFixed(2)} USDT). شما در حال حاضر ${(currentBalance).toLocaleString()} توکن دارید.`, 'warning');
         return;
     }
 
-    if (tokensToReceive > maxTokens) {
-        alert(`حداکثر مشارکت در پیش فروش برای هر کیف پول 200 میلیون توکن فیکسر کوین است (${(maxTokens * TOKEN_PRICE).toFixed(2)} USDT)`);
+    if (totalTokensAfterPurchase > maxTokens) {
+        showToast(`حداکثر مشارکت در پیش فروش برای هر کیف پول 200 میلیون توکن فیکسر کوین است (${(maxTokens * TOKEN_PRICE).toFixed(2)} USDT). شما در حال حاضر ${(currentBalance).toLocaleString()} توکن دارید و می‌توانید حداکثر ${(maxTokens - currentBalance).toLocaleString()} توکن دیگر خریداری کنید.`, 'warning');
         return;
     }
 
@@ -3741,12 +3875,12 @@ async function buyTokens() {
         const tx = await presaleContract.buyTokens(amountInWei, referrerAddress);
         await tx.wait();
 
-        // Track referral purchase
-        if (referrerAddress !== "0x0000000000000000000000000000000000000000") {
+        // Track referral purchase - فقط اگر رفرال معتبر باشد
+        if (referrerAddress !== "0x0000000000000000000000000000000000000000" && referrerAddress.startsWith('0x') && referrerAddress.length === 42) {
             trackReferral(referrerAddress, userWalletAddress, parseFloat(usdtAmount));
         }
 
-        alert("خرید با موفقیت انجام شد!");
+        showToast("خرید با موفقیت انجام شد! لینک تراکنش: https://basescan.org/tx/" + tx.hash, 'success', 6000);
         buyBtn.textContent = translations[currentLang].buyBtn;
         buyBtn.disabled = false;
 
@@ -3754,12 +3888,49 @@ async function buyTokens() {
         await updateBalances();
     } catch (error) {
         console.error('Error buying tokens:', error);
-        alert("خطا در خرید توکن: " + error.message);
+        showToast("خطا در خرید توکن: " + error.message, 'error');
         const buyBtn = document.getElementById('buy-btn');
         buyBtn.textContent = translations[currentLang].buyBtn;
         buyBtn.disabled = false;
     }
 }
+
+// Claim purchased tokens after presale ends
+async function claimTokens() {
+    if (!userWalletAddress) {
+        showToast("لطفاً ابتدا کیف پول خود را متصل کنید.", 'warning');
+        return;
+    }
+
+    if (!await checkNetwork()) {
+        showToast("لطفاً به شبکه Base تغییر دهید.", 'warning');
+        await switchNetworkToBase();
+        return;
+    }
+
+    try {
+        const claimBtn = document.getElementById('claim-btn');
+        claimBtn.textContent = "Processing...";
+        claimBtn.disabled = true;
+
+        const tx = await presaleContract.claimTokens();
+        await tx.wait();
+
+        showToast("توکن‌ها با موفقیت برداشت شدند! لینک تراکنش: https://basescan.org/tx/" + tx.hash, 'success', 6000);
+        claimBtn.textContent = translations[currentLang].claimBtn;
+        claimBtn.disabled = false;
+
+        // Update balances
+        await updateBalances();
+    } catch (error) {
+        console.error('Error claiming tokens:', error);
+        showToast("خطا در برداشت توکن: " + error.message, 'error');
+        const claimBtn = document.getElementById('claim-btn');
+        claimBtn.textContent = translations[currentLang].claimBtn;
+        claimBtn.disabled = false;
+    }
+}
+
         // Initialize contracts when wallet is connected
         async function initializeContracts() {
             if (!window.ethereum || !userWalletAddress) return;
