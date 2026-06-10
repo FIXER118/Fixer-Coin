@@ -6,6 +6,7 @@
     <title id="site-title">Fixer Coin | Official Website</title>
     
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" type="application/javascript"></script>
     
     <script src="FixerPresaleABI.js" type="application/javascript"></script>
     <script>
@@ -35,8 +36,29 @@
         :root {
             --bg-color: #0a1f33;
             --card-bg: #0d2538;
+            --text-color: #ffffff;
             --primary: #00ffcc;
-            --secondary: #0077ff;
+            --secondary: #ffb703;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-color: #1a1a2e;
+            --primary: #00cc99;
+            --secondary: #ff9500;
+            --warning: #ff9500;
+            --text: #1a1a2e;
+            --text-muted: #666666;
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a1f33;
+            --card-bg: #0d2538;
+            --text-color: #ffffff;
+            --primary: #00ffcc;
+            --secondary: #ffb703;
             --warning: #ffb703;
             --text: #ffffff;
             --text-muted: #7e8f9f;
@@ -351,6 +373,55 @@
 
         button:not(.loading) .spinner {
             display: none;
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Improved hover effects */
+        .presale-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .presale-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 255, 204, 0.3);
+        }
+
+        .btn-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
+        }
+
+        .btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 183, 3, 0.4);
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
+        }
+
+        .btn-claim:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 119, 255, 0.4);
+        }
+
+        .dashboard-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 204, 0.2);
         }
  
         .presale-wrapper {
@@ -1585,6 +1656,30 @@
             .mobile-menu-btn { display: block; }
             .mobile-nav { display: none; }
             .mobile-nav.active { display: flex; }
+
+            /* Mobile Presale Card */
+            .presale-wrapper { min-width: 100%; max-width: 100%; }
+            .presale-card { padding: 20px; }
+            .input-group input { font-size: 14px; }
+            .btn-connect, .btn-approve, .btn-buy, .btn-claim { font-size: 14px; padding: 12px 20px; }
+
+            /* Mobile Dashboard */
+            .dashboard-box { padding: 20px; }
+            .db-grid { grid-template-columns: 1fr; }
+            .db-item { grid-column: span 1; }
+
+            /* Mobile Hero */
+            .hero-text h1 { font-size: 24px; }
+            .hero-text p { font-size: 14px; }
+
+            /* Mobile Features */
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card { padding: 25px 20px; }
+
+            /* Mobile Buttons */
+            .header-actions { gap: 8px; }
+            .btn-lang, .btn-theme { padding: 8px 12px; font-size: 14px; }
+            .btn-connect { padding: 8px 16px; font-size: 12px; }
         }
     </style>
 </head>
@@ -1616,6 +1711,7 @@
         </div>
         <div class="header-actions">
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobile-menu-btn">☰</button>
+            <button class="btn-theme" onclick="toggleTheme()" id="theme-btn">🌙</button>
             <button class="btn-lang" onclick="toggleLanguage()" id="lang-btn">فارسی</button>
             <button class="btn-connect" onclick="connectWallet()" id="wallet-btn">Connect Wallet</button>
         </div>
@@ -1675,15 +1771,15 @@
     }
     </style>
 
-    <h3 style="font-family: 'Segoe UI', Inter, sans-serif; font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 25px; letter-spacing: 1px; animation: fixerFireFlash 1.2s infinite alternate; margin-top: 0;">
+    <h3 style="font-family: 'Segoe UI', Inter, sans-serif; font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 25px; letter-spacing: 1px; animation: fixerFireFlash 1.2s infinite alternate; margin-top: 0;" id="video-intro-title">
         FIXER COIN INTRODUCTION
     </h3>
     
-    <video controls preload="metadata" style="width: 100%; max-width: 520px; height: auto; border-radius: 12px; box-shadow: 0px 6px 25px rgba(0, 255, 204, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); outline: none;">
+    <video controls preload="metadata" style="width: 100%; max-width: 520px; height: auto; border-radius: 12px; box-shadow: 0px 6px 25px rgba(0, 255, 204, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); outline: none;" id="intro-video">
         <source src="FIXERCO.mp4" type="video/mp4">
     </video>
 
-    <p style="font-family: 'Segoe UI', Inter, sans-serif; color: #00ffcc; font-size: 16px; font-weight: bold; text-align: center; margin-top: 15px; letter-spacing: 0.5px;">
+    <p style="font-family: 'Segoe UI', Inter, sans-serif; color: #00ffcc; font-size: 16px; font-weight: bold; text-align: center; margin-top: 15px; letter-spacing: 0.5px;" id="video-intro-caption">
         💎🚀 This is the power of the Fixer Community! 🔥
     </p>
 
@@ -1769,6 +1865,12 @@
         <div class="ref-link-text" id="ref-link-display">Please connect your wallet first...</div>
         <button class="btn-copy-ref" onclick="copyReferralLink()" id="ref-copy-btn">Copy Link</button>
     </div>
+    <div style="text-align: center; margin-top: 15px;">
+        <div id="qrcode-container" style="display: none; justify-content: center; margin-top: 10px;">
+            <canvas id="qrcode"></canvas>
+        </div>
+        <button onclick="toggleQRCode()" id="qr-toggle-btn" style="margin-top: 10px; padding: 8px 16px; background: linear-gradient(135deg, #00ffcc, #00ccaa); border: none; border-radius: 8px; color: #000; font-weight: bold; cursor: pointer; font-size: 14px;">Show QR Code</button>
+    </div>
 </div>
 
 <style>
@@ -1790,20 +1892,20 @@
 </style>
 
 <div style="margin: 25px auto; max-width: 100%; text-align: center;">
-    <h3 class="blinking-title">
+    <h3 class="blinking-title" id="metamask-guide-title">
         🚨 METAMASK BUYING GUIDE
     </h3>
-    <video width="100%" controls controlsList="nodownload" oncontextmenu="return false;" style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;">
+    <video width="100%" controls controlsList="nodownload" oncontextmenu="return false;" style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;" id="metamask-video">
         <source src="metamaskfixer.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
 
 <div style="margin: 35px auto 25px auto; max-width: 100%; text-align: center;">
-    <h3 class="blinking-title">
+    <h3 class="blinking-title" id="trustwallet-guide-title">
         🚨 TRUST WALLET BUYING GUIDE
     </h3>
-    <video width="100%" controls controlsList="nodownload" oncontextmenu="return false;" style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;">
+    <video width="100%" controls controlsList="nodownload" oncontextmenu="return false;" style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 450px;" id="trustwallet-video">
         <source src="trustwalletfixer.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -3229,6 +3331,48 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById('network-status').textContent = langData.networkStatus;
             }
 
+            // Video elements
+            if (document.getElementById('video-intro-title')) {
+                document.getElementById('video-intro-title').textContent = lang === 'fa' ? 'معرفی فیکسر کوین' : 'FIXER COIN INTRODUCTION';
+                document.getElementById('video-intro-caption').textContent = lang === 'fa' ? '💎🚀 این قدرت جامعه فیکسر است! 🔥' : '💎🚀 This is the power of the Fixer Community! 🔥';
+                
+                // Change video source based on language
+                const introVideo = document.getElementById('intro-video');
+                if (introVideo) {
+                    const source = introVideo.querySelector('source');
+                    if (source) {
+                        source.src = lang === 'fa' ? 'FIXERCO_fa.mp4' : 'FIXERCO.mp4';
+                        introVideo.load();
+                    }
+                }
+            }
+
+            if (document.getElementById('metamask-guide-title')) {
+                document.getElementById('metamask-guide-title').textContent = lang === 'fa' ? '🚨 راهنمای خرید با متامسک' : '🚨 METAMASK BUYING GUIDE';
+                
+                const metamaskVideo = document.getElementById('metamask-video');
+                if (metamaskVideo) {
+                    const source = metamaskVideo.querySelector('source');
+                    if (source) {
+                        source.src = lang === 'fa' ? 'metamaskfixer_fa.mp4' : 'metamaskfixer.mp4';
+                        metamaskVideo.load();
+                    }
+                }
+            }
+
+            if (document.getElementById('trustwallet-guide-title')) {
+                document.getElementById('trustwallet-guide-title').textContent = lang === 'fa' ? '🚨 راهنمای خرید با تراست ولت' : '🚨 TRUST WALLET BUYING GUIDE';
+                
+                const trustwalletVideo = document.getElementById('trustwallet-video');
+                if (trustwalletVideo) {
+                    const source = trustwalletVideo.querySelector('source');
+                    if (source) {
+                        source.src = lang === 'fa' ? 'trustwalletfixer_fa.mp4' : 'trustwalletfixer.mp4';
+                        trustwalletVideo.load();
+                    }
+                }
+            }
+
             // Schematic elements - Identity
             if (document.getElementById('id-spec-title')) {
                 document.getElementById('id-spec-title').textContent = langData.idSpecTitle;
@@ -3537,6 +3681,41 @@ if (!userWalletAddress) {
             showToast("لینک رفرال کپی شد!", 'success');
         }
 
+        function toggleQRCode() {
+            const qrContainer = document.getElementById('qrcode-container');
+            const qrBtn = document.getElementById('qr-toggle-btn');
+            const refLink = document.getElementById('ref-link-display').innerText;
+
+            if (qrContainer.style.display === 'none') {
+                if (refLink && refLink !== 'Please connect your wallet first...') {
+                    QRCode.toCanvas(document.getElementById('qrcode'), refLink, function (error) {
+                        if (error) console.error(error);
+                    });
+                    qrContainer.style.display = 'flex';
+                    qrBtn.textContent = 'Hide QR Code';
+                } else {
+                    showToast('لطفاً ابتدا کیف پول خود را متصل کنید.', 'warning');
+                }
+            } else {
+                qrContainer.style.display = 'none';
+                qrBtn.textContent = 'Show QR Code';
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const themeBtn = document.getElementById('theme-btn');
+            
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeBtn.textContent = '☀️';
+            }
+        }
+
         // Admin Panel Functions
         function toggleAdminPanel() {
             const panel = document.getElementById('admin-panel');
@@ -3780,6 +3959,20 @@ try {
                 return;
             }
 
+            // تأیید آدرس قرارداد قبل از تراکنش
+            const contractConfirmation = confirm(
+                `⚠️ Contract Address Verification\n\n` +
+                `You are about to interact with the following contract:\n\n` +
+                `Presale Contract: ${PRESALE_ADDRESS}\n\n` +
+                `Please verify this address matches the official Fixer Coin presale contract.\n\n` +
+                `Click OK to proceed, or Cancel to abort.`
+            );
+
+            if (!contractConfirmation) {
+                showToast("تراکنش توسط کاربر لغو شد.", 'warning');
+                return;
+            }
+
             try {
                 const approveBtn = document.getElementById('approve-btn');
                 approveBtn.innerHTML = '<span class="spinner"></span>Processing...';
@@ -3859,9 +4052,24 @@ async function buyTokens() {
 
     const referrerAddress = document.getElementById('referrerInput').value || "0x0000000000000000000000000000000000000000";
 
+    // تأیید آدرس قرارداد قبل از تراکنش
+    const contractConfirmation = confirm(
+        `⚠️ Contract Address Verification\n\n` +
+        `You are about to interact with the following contract:\n\n` +
+        `Presale Contract: ${PRESALE_ADDRESS}\n\n` +
+        `Please verify this address matches the official Fixer Coin presale contract.\n\n` +
+        `Click OK to proceed, or Cancel to abort.`
+    );
+
+    if (!contractConfirmation) {
+        showToast("تراکنش توسط کاربر لغو شد.", 'warning');
+        return;
+    }
+
     try {
         const buyBtn = document.getElementById('buy-btn');
-        buyBtn.textContent = "Processing...";
+        buyBtn.innerHTML = '<span class="spinner"></span>Processing...';
+        buyBtn.classList.add('loading');
         buyBtn.disabled = true;
 
         const amountInWei = ethers.utils.parseUnits(usdtAmount, 6);
@@ -3882,6 +4090,7 @@ async function buyTokens() {
 
         showToast("خرید با موفقیت انجام شد! لینک تراکنش: https://basescan.org/tx/" + tx.hash, 'success', 6000);
         buyBtn.textContent = translations[currentLang].buyBtn;
+        buyBtn.classList.remove('loading');
         buyBtn.disabled = false;
 
         // Update balances
@@ -3891,6 +4100,7 @@ async function buyTokens() {
         showToast("خطا در خرید توکن: " + error.message, 'error');
         const buyBtn = document.getElementById('buy-btn');
         buyBtn.textContent = translations[currentLang].buyBtn;
+        buyBtn.classList.remove('loading');
         buyBtn.disabled = false;
     }
 }
@@ -3908,9 +4118,24 @@ async function claimTokens() {
         return;
     }
 
+    // تأیید آدرس قرارداد قبل از تراکنش
+    const contractConfirmation = confirm(
+        `⚠️ Contract Address Verification\n\n` +
+        `You are about to interact with the following contract:\n\n` +
+        `Presale Contract: ${PRESALE_ADDRESS}\n\n` +
+        `Please verify this address matches the official Fixer Coin presale contract.\n\n` +
+        `Click OK to proceed, or Cancel to abort.`
+    );
+
+    if (!contractConfirmation) {
+        showToast("تراکنش توسط کاربر لغو شد.", 'warning');
+        return;
+    }
+
     try {
         const claimBtn = document.getElementById('claim-btn');
-        claimBtn.textContent = "Processing...";
+        claimBtn.innerHTML = '<span class="spinner"></span>Processing...';
+        claimBtn.classList.add('loading');
         claimBtn.disabled = true;
 
         const tx = await presaleContract.claimTokens();
@@ -3918,6 +4143,7 @@ async function claimTokens() {
 
         showToast("توکن‌ها با موفقیت برداشت شدند! لینک تراکنش: https://basescan.org/tx/" + tx.hash, 'success', 6000);
         claimBtn.textContent = translations[currentLang].claimBtn;
+        claimBtn.classList.remove('loading');
         claimBtn.disabled = false;
 
         // Update balances
@@ -3927,6 +4153,7 @@ async function claimTokens() {
         showToast("خطا در برداشت توکن: " + error.message, 'error');
         const claimBtn = document.getElementById('claim-btn');
         claimBtn.textContent = translations[currentLang].claimBtn;
+        claimBtn.classList.remove('loading');
         claimBtn.disabled = false;
     }
 }
