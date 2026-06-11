@@ -223,21 +223,23 @@ Blame
 
         .presale-link {
             display: inline-block;
-            color: #00ffcc;
-            font-size: 16px;
+            color: #ffcc00;
+            font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            border-radius: 8px;
-            background: rgba(0, 255, 204, 0.1);
+            padding: 12px 25px;
+            border: 2px solid rgba(255, 204, 0, 0.5);
+            border-radius: 10px;
+            background: rgba(255, 204, 0, 0.15);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .presale-link:hover {
-            background: rgba(0, 255, 204, 0.2);
-            border-color: rgba(0, 255, 204, 0.5);
-            transform: scale(1.05);
+            background: rgba(255, 204, 0, 0.25);
+            border-color: rgba(255, 204, 0, 0.8);
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
         }
 
         /* Mobile Menu Button */
@@ -1712,7 +1714,7 @@ Blame
                 <h2 class="presale-banner-text">
                     <span class="blink-word">چرا</span> و <span class="blink-word">چگونه</span> در پیش فروش <span class="blink-word">فیکسر کوین</span> مشارکت نمایید؟
                 </h2>
-                <a href="https://fixerco.github.io/PresaleFIXERCOIN/" target="_blank" class="presale-link">https://fixerco.github.io/PresaleFIXERCOIN/</a>
+                <a href="https://fixerco.github.io/PresaleFIXERCOIN/" target="_blank" class="presale-link" id="presale-link">اینجا کلیک نمایید</a>
             </div>
             <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="hero-logo-large">
             <div class="hero-text">
@@ -2482,6 +2484,7 @@ Blame
                 videoIntroTitle: "معرفی فیکسر کوین",
                 videoIntroText: "💎🚀 این قدرت جامعه فیکسر است! 🔥",
                 presaleBannerText: "<span class='blink-word'>چرا</span> و <span class='blink-word'>چگونه</span> در پیش فروش <span class='blink-word'>فیکسر کوین</span> مشارکت نمایید؟",
+                presaleLinkText: "اینجا کلیک نمایید",
                 presaleLink: "https://fixerco.github.io/PresaleFIXERCOIN/",
                 featuresTitle: "ویژگی‌های بنیادی وایت پیپر فیکسر",
                 f1Title: "🔒 مکانیزم ضدِ نوسان (Anti-Dump)",
@@ -2678,6 +2681,7 @@ Blame
                 videoIntroTitle: "FIXER COIN INTRODUCTION",
                 videoIntroText: "💎🚀 This is the power of the Fixer Community! 🔥",
                 presaleBannerText: "<span class='blink-word'>Why</span> and <span class='blink-word'>How</span> to Participate in <span class='blink-word'>Fixer Coin</span> Presale?",
+                presaleLinkText: "Click Here",
                 presaleLink: "https://fixerco.github.io/PresaleFIXERCOIN/",
                 featuresTitle: "Core Whitepaper Features",
                 f1Title: "🔒 Anti-Dump Mechanism",
@@ -2887,7 +2891,7 @@ Blame
             document.getElementById('video-intro-title').textContent = langData.videoIntroTitle;
             document.getElementById('video-intro-text').textContent = langData.videoIntroText;
             document.querySelector('.presale-banner-text').innerHTML = langData.presaleBannerText;
-            document.querySelector('.presale-link').textContent = langData.presaleLink;
+            document.querySelector('.presale-link').textContent = langData.presaleLinkText;
             document.querySelector('.presale-link').href = langData.presaleLink;
             document.getElementById('hero-title').innerHTML = langData.heroTitle;
             document.getElementById('hero-desc').textContent = langData.heroDesc;
