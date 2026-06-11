@@ -192,6 +192,54 @@ Blame
             }
         }
 
+        .presale-banner {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+
+        .presale-banner-text {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-family: 'B Nazanin', sans-serif;
+        }
+
+        .blink-word {
+            animation: wordBlink 1s infinite alternate;
+        }
+
+        @keyframes wordBlink {
+            0% {
+                color: #ffcc00;
+                text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9900;
+            }
+            100% {
+                color: #ffffff;
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #cccccc;
+            }
+        }
+
+        .presale-link {
+            display: inline-block;
+            color: #00ffcc;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 255, 204, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .presale-link:hover {
+            background: rgba(0, 255, 204, 0.2);
+            border-color: rgba(0, 255, 204, 0.5);
+            transform: scale(1.05);
+        }
+
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
@@ -1622,7 +1670,7 @@ Blame
             <a href="#identity" id="nav-identity">Identity</a>
             <a href="#roadmap" id="nav-roadmap">Roadmap</a>
             <a href="#whitepaper" id="nav-whitepaper">Whitepaper</a>
-            <a href="#home" id="nav-presale">Presale</a>
+            <a href="https://fixerco.github.io/PresaleFIXERCOIN/" target="_blank" id="nav-presale">Presale</a>
         </nav>
 
         <!-- Mobile Navigation -->
@@ -1631,7 +1679,7 @@ Blame
             <a href="#identity" onclick="toggleMobileMenu()">Identity</a>
             <a href="#roadmap" onclick="toggleMobileMenu()">Roadmap</a>
             <a href="#whitepaper" onclick="toggleMobileMenu()">Whitepaper</a>
-            <a href="#home" onclick="toggleMobileMenu()">Presale</a>
+            <a href="https://fixerco.github.io/PresaleFIXERCOIN/" target="_blank" onclick="toggleMobileMenu()">Presale</a>
         </div>
         <div class="header-actions">
             <div class="social-icons">
@@ -1660,6 +1708,12 @@ Blame
  
     <main>
         <section class="hero-container" id="home">
+            <div class="presale-banner">
+                <h2 class="presale-banner-text">
+                    <span class="blink-word">چرا</span> و <span class="blink-word">چگونه</span> در پیش فروش <span class="blink-word">فیکسر کوین</span> مشارکت نمایید؟
+                </h2>
+                <a href="https://fixerco.github.io/PresaleFIXERCOIN/" target="_blank" class="presale-link">https://fixerco.github.io/PresaleFIXERCOIN/</a>
+            </div>
             <img src="fixer_coin_bg.png" alt="Fixer Coin Logo" class="hero-logo-large">
             <div class="hero-text">
                 <h1 id="hero-title">Smart & Financial Ecosystem <br><span>Fixer Coin (FIXER)</span></h1>
@@ -2427,6 +2481,8 @@ Blame
                 copyBtn: "کپی آدرس قرارداد",
                 videoIntroTitle: "معرفی فیکسر کوین",
                 videoIntroText: "💎🚀 این قدرت جامعه فیکسر است! 🔥",
+                presaleBannerText: "<span class='blink-word'>چرا</span> و <span class='blink-word'>چگونه</span> در پیش فروش <span class='blink-word'>فیکسر کوین</span> مشارکت نمایید؟",
+                presaleLink: "https://fixerco.github.io/PresaleFIXERCOIN/",
                 featuresTitle: "ویژگی‌های بنیادی وایت پیپر فیکسر",
                 f1Title: "🔒 مکانیزم ضدِ نوسان (Anti-Dump)",
                 f1Desc: "اعمال محدودیت‌های معاملاتی هوشمند بر روی صرافی‌ها (حداقل ۱۰ میلیون و حداکثر ۲۰۰ میلیون توکن) جهت جلوگیری از دستکاری قیمت توسط نهنگ‌ها.",
@@ -2621,6 +2677,8 @@ Blame
                 copyBtn: "Copy Contract Address",
                 videoIntroTitle: "FIXER COIN INTRODUCTION",
                 videoIntroText: "💎🚀 This is the power of the Fixer Community! 🔥",
+                presaleBannerText: "<span class='blink-word'>Why</span> and <span class='blink-word'>How</span> to Participate in <span class='blink-word'>Fixer Coin</span> Presale?",
+                presaleLink: "https://fixerco.github.io/PresaleFIXERCOIN/",
                 featuresTitle: "Core Whitepaper Features",
                 f1Title: "🔒 Anti-Dump Mechanism",
                 f1Desc: "Imposing smart trading limits on exchanges (Min 10M and Max 200M tokens) to prevent price manipulation by whales.",
@@ -2828,6 +2886,9 @@ Blame
             document.getElementById('video-transcript-container').style.textAlign = currentLang === 'fa' ? 'right' : 'left';
             document.getElementById('video-intro-title').textContent = langData.videoIntroTitle;
             document.getElementById('video-intro-text').textContent = langData.videoIntroText;
+            document.querySelector('.presale-banner-text').innerHTML = langData.presaleBannerText;
+            document.querySelector('.presale-link').textContent = langData.presaleLink;
+            document.querySelector('.presale-link').href = langData.presaleLink;
             document.getElementById('hero-title').innerHTML = langData.heroTitle;
             document.getElementById('hero-desc').textContent = langData.heroDesc;
             document.getElementById('copy-btn').textContent = langData.copyBtn;
